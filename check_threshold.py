@@ -1,19 +1,12 @@
 import sys
-import mlflow
 
 THRESHOLD = 0.85
 
 with open("model_info.txt", "r") as f:
-    run_id = f.read().strip()
+    lines = f.read().strip().splitlines()
 
-client = mlflow.tracking.MlflowClient()
-run = client.get_run(run_id)
-
-accuracy = run.data.metrics.get("accuracy")
-
-if accuracy is None:
-    print("ERROR: accuracy metric not found.")
-    sys.exit(1)
+run_id = lines[0].strip()
+accuracy = float(lines[1].strip())
 
 print("Run ID:", run_id)
 print("Accuracy:", accuracy)
