@@ -33,7 +33,7 @@ jobs:
 
       - name: Train model and log to MLflow
         env:
-          FORCE_ACCURACY: "0.80"
+          FORCE_ACCURACY: "0.90"
         run: |
           python train.py
 
