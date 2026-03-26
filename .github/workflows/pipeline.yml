@@ -28,15 +28,18 @@ jobs:
           pip install -r requirements.txt
 
       - name: Pull data with DVC
-        run: echo "Simulating dvc pull..."
+        run: |
+          echo "Simulating dvc pull..."
 
       - name: Train model and log to MLflow
         env:
           FORCE_ACCURACY: "0.80"
-        run: python train.py
+        run: |
+          python train.py
 
       - name: Show model_info.txt
-        run: cat model_info.txt
+        run: |
+          cat model_info.txt
 
       - name: Upload model_info artifact
         uses: actions/upload-artifact@v4
@@ -83,10 +86,13 @@ jobs:
           path: mlruns
 
       - name: Show downloaded model_info.txt
-        run: cat model_info.txt
+        run: |
+          cat model_info.txt
 
       - name: Check accuracy threshold
-        run: python check_threshold.py
+        run: |
+          python check_threshold.py
 
       - name: Mock Build
-        run: echo "Building Docker image for Run ID: $(cat model_info.txt)"
+        run: |
+          echo "Building Docker image for Run ID: $(cat model_info.txt)"
